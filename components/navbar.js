@@ -6,13 +6,10 @@ export default function Navbar(){
             <Link href= '/'>
            <a className='font-black text-lg'>Home</a> 
             </Link>
+    
             
-            <Link href= '/observation'>
-            <a className='font-black text-lg'>Observation</a>
-            </Link>
-
-            <Link href= '/objetive'>
-            <a className='font-black text-lg'>Objetive</a>
+            <Link href= '/studyCase'>
+            <a className='font-black text-lg'>Study Case</a>
             </Link>
 
             <style jsx>

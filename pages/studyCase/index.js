@@ -9,26 +9,29 @@ import router from "next/router";
 
 
 
-function Observation  ({observation}) {
+function StudyCase  ({studyCase}) {
     const router1 = useRouter();
     
     
     
     return(
         <Layout>
-        <Title>Observation List</Title>
-        <div key={observation.id}>
-        {observation.map(observation => {
+        <Title>Study Case List</Title>
+        <div key={studyCase._id}>
+        {studyCase.map(studyCase => {
             return(
-                <div className='card' style={{ display:"flex", flexDirection:"column", marginTop:"8px"}}>
-                <Link href={'/observation/[id]'} as={`/observation/${observation.id}`} onClick={()=> router1.push('observation/form'+ observation.id)}>
+                <div className='card' style={{ display:"flex", flexDirection:"column", marginTop:"10px"}}>
+                <Link href={`studyCase/[id]`} as={`studyCase/${studyCase._id}`} onClick={()=> router1.push('studyCase/form'+ studyCase._id)}>
                 <a >
-                <h3>{observation.name}</h3>
-                <p>{observation.id}</p>
+                <h3>Name: {studyCase.name}</h3>
+                <p>Id T.T: {studyCase.idTemporalT}</p>
+                <p>Create: {studyCase.createdAt}</p>
+                <p>Update: {studyCase.updatedAt}</p>
+                <p>Id: {studyCase._id}</p>
                 </a>
                 </Link>
                 
-                <button style={{display:"flex",justifyContent:"flex-end", width:"max-content"}} className='bg-red-500 px-1 py-3 hover:bg-red-300 items-center ' onClick={()=> deleteObservation(observation.id)}>
+                <button style={{display:"flex",justifyContent:"flex-end", width:"max-content"}} className='bg-red-500 px-1 py-3 hover:bg-red-300 items-center ' onClick={()=> deleteStudyCases(studyCase._id)}>
                 <VscTrash className= 'mr-1'/>
                 Delete
                 </button>
@@ -40,11 +43,11 @@ function Observation  ({observation}) {
             
             </div>
             <div className='flex-grow'>
-            <button className='bg-blue-400 px-4 py-1 hover:bg-blue-300 inline-flex items-center mx-2'onClick={()=>router.push('observation/form')}>
+            <button className='bg-blue-400 px-4 py-1 hover:bg-blue-300 inline-flex items-center mx-2'onClick={()=>router.push('studyCase/new')}>
             <AiOutlinePlus className= 'mr-1'/>
-            Add Observation
+            Add Study Case
             </button>
-            <button className='bg-blue-400 px-4 py-1 hover:bg-blue-300 inline-flex items-center mx-2'onClick={()=>router.push('observation/')}>
+            <button className='bg-blue-400 px-4 py-1 hover:bg-blue-300 inline-flex items-center mx-2'onClick={()=>router.push('studyCase/')}>
             <AiOutlinePlus className= 'mr-1'/>
             Refrech
             </button>
@@ -82,20 +85,20 @@ function Observation  ({observation}) {
             
             )
         }
-        export default Observation;
+        export default StudyCase;
         
         export async function getStaticProps() {
-            const res = await fetch('http://localhost:3000/observation') // url del backend
-            const observation = await res.json()
+            const res = await fetch('http://localhost:3000/api/v1/studyCases') // url del backend
+            const studyCase = await res.json()
             return {
                 props: {
-                    observation,
+                    studyCase,
                 },
             }
         }
         
-        export async function deleteObservation (idObservation, router){
-            const response = await fetch(`http://localhost:3000/observation/${idObservation}`,{
+        export async function deleteStudyCases (id){
+            const response = await fetch(`http://localhost:3000/api/v1/studyCases/${id}`,{
             method: 'DELETE',
             cors: 'no-cors',
             cache: 'no-cache',
@@ -106,5 +109,6 @@ function Observation  ({observation}) {
             redirect: 'follow',
             referrerPolicy: 'no-referrer',
         })
-        const data = response.json()
     }
+
+    

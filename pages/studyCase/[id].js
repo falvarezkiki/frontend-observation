@@ -3,21 +3,21 @@ import Layout from "../../components/layout"
 import Title from "../../components/title"
 import Head from 'next/head';
 
-export default function observation1({observation}){
+export default function studyCase1({studyCase}){
     const router = useRouter();
     
     return(
         <Layout>
             <Head>
-            <title>Observacion {observation.id}</title>
+            <title>Study Case {studyCase.id}</title>
             </Head>
-            <Title>Observation Details</Title>
+            <Title>Study Cases Details</Title>
             <div  className='card'>
-                    <h3> Observacion</h3>
+                    <h3> Study Case</h3>
 
-                    <p>ID: {observation.id}</p>
+                    <p>ID: {studyCase._id}</p>
                     
-                    <p>Nombre: {observation.name}</p>
+                    <p>Nombre: {studyCase.name}</p>
             </div>
             <style jsx>
                 {`
@@ -54,11 +54,11 @@ export default function observation1({observation}){
 }
 
 export async function getStaticPaths() {
-    const res = await fetch('http://localhost:3000/observation');
-    const observations = await res.json();
-    const paths = observations.map(observation => {
+    const res = await fetch('http://localhost:3000/api/v1/studyCases');
+    const studyCases = await res.json();
+    const paths = studyCases.map(studyCase => {
     return {
-        params: { id: `${observation.id}` }
+        params: { id: `${studyCase.id}` }
     }
     });
     
@@ -69,11 +69,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const res = await fetch(`http://localhost:3000/observation/${params.id}`);
-    const observation = await res.json();
+    const res = await fetch(`http://localhost:3000/api/v1/studyCases/${params.id}`);
+    const studyCase = await res.json();
     return {
         props: {
-            observation
+            studyCase
         }
     }
 }
