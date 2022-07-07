@@ -9,7 +9,7 @@ export default function studyCase1({studyCase}){
     return(
         <Layout>
             <Head>
-            <title>Study Case {studyCase.id}</title>
+            <title>Study Case</title>
             </Head>
             <Title>Study Cases Details</Title>
             <div  className='card'>
@@ -58,7 +58,7 @@ export async function getStaticPaths() {
     const studyCases = await res.json();
     const paths = studyCases.map(studyCase => {
     return {
-        params: { id: `${studyCase.id}` }
+        params: { id: `${studyCase._id}` }
     }
     });
     

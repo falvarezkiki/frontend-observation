@@ -66,12 +66,10 @@ class StudyCaseForm extends React.Component {
             <input name="idTemporalT" type="text" placeholder="Id temporal t" className="w-full mb-5" value={this.state.idTemporalT} onChange={this.changeIdTemporalT}></input>
             </div>
             <div className='flex-grow'> 
-            <Link href={'/studyCase'}>
             <button className='bg-blue-400 px-2 py-0.5 hover:bg-blue-300 inline-flex items-center mx-2'type="submit">
             <AiOutlinePlus/>
             SAVE
             </button>
-            </Link>
             <Link href={'/studyCase'}>
             <a>
             <button className='bg-blue-400 px-2 py-0.5 hover:bg-blue-300 inline-flex items-center mx-2'>
