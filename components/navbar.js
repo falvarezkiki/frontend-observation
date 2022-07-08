@@ -12,6 +12,10 @@ export default function Navbar(){
             <a className='font-black text-lg'>Study Case</a>
             </Link>
 
+            <Link href= '/cases'>
+            <a className='font-black text-lg'>Cases</a>
+            </Link>
+
             <style jsx>
                 {`
                 nav {

@@ -3,6 +3,7 @@ import Layout from "../../components/layout"
 import Title from "../../components/title"
 import Head from 'next/head';
 
+
 export default function studyCase1({studyCase}){
     const router = useRouter();
     
@@ -49,6 +50,13 @@ export default function studyCase1({studyCase}){
                 }
                 `}
             </style>
+            
+
+            
+
+            
+
+
         </Layout>
     )
 }
