@@ -9,26 +9,29 @@ import router from "next/router";
 
 
 
-function Observation  ({observation}) {
+function Interventions  ({interventions}) {
     const router1 = useRouter();
     
     
     
     return(
         <Layout>
-        <Title>Observation List</Title>
-        <div key={observation.id}>
-        {observation.map(observation => {
+        <Title>Interventions List</Title>
+        <div key={interventions._id}>
+        {interventions.map(interventions => {
             return(
-                <div className='card' style={{ display:"flex", flexDirection:"column", marginTop:"8px"}}>
-                <Link href={'/observation/[id]'} as={`/observation/${observation.id}`} onClick={()=> router1.push('observation/form'+ observation.id)}>
+                <div className='card' style={{ display:"flex", flexDirection:"column", marginTop:"10px"}}>
+                <Link href={`interventions/[id]`} as={`interventions/${interventions._id}`} onClick={()=> router1.push('interventions/new'+ interventions._id)}>
                 <a >
-                <h3>{observation.name}</h3>
-                <p>{observation.id}</p>
+                <h3>Name: {interventions.name}</h3>
+                <p>Description: {interventions.description}</p>
+                <p>ID CLient: {interventions.idClient}</p>
+                <p>ID Consultant: {interventions.idConsultant}</p>
+                <p>ID Study Case: {interventions.idStudyCase}</p>
                 </a>
                 </Link>
                 
-                <button style={{display:"flex",justifyContent:"flex-end", width:"max-content"}} className='bg-red-500 px-1 py-3 hover:bg-red-300 items-center ' onClick={()=> deleteObservation(observation.id)}>
+                <button style={{display:"flex",justifyContent:"flex-end", width:"max-content"}} className='bg-red-500 px-1 py-3 hover:bg-red-300 items-center ' onClick={()=> deleteInterventions(interventions._id)}>
                 <VscTrash className= 'mr-1'/>
                 Delete
                 </button>
@@ -40,11 +43,11 @@ function Observation  ({observation}) {
             
             </div>
             <div className='flex-grow'>
-            <button className='bg-blue-400 px-4 py-1 hover:bg-blue-300 inline-flex items-center mx-2'onClick={()=>router.push('observation/form')}>
+            <button className='bg-blue-400 px-4 py-1 hover:bg-blue-300 inline-flex items-center mx-2'onClick={()=>router.push('interventions/new')}>
             <AiOutlinePlus className= 'mr-1'/>
-            Add Observation
+            Add Intervention
             </button>
-            <button className='bg-blue-400 px-4 py-1 hover:bg-blue-300 inline-flex items-center mx-2'onClick={()=>router.push('observation/')}>
+            <button className='bg-blue-400 px-4 py-1 hover:bg-blue-300 inline-flex items-center mx-2'onClick={()=>router.push('interventions/')}>
             <AiOutlinePlus className= 'mr-1'/>
             Refrech
             </button>
@@ -82,20 +85,20 @@ function Observation  ({observation}) {
             
             )
         }
-        export default Observation;
+        export default Interventions;
         
         export async function getStaticProps() {
-            const res = await fetch('http://localhost:3000/observation') // url del backend
-            const observation = await res.json()
+            const res = await fetch('http://localhost:3000/api/v1/interventions') // url del backend
+            const interventions = await res.json()
             return {
                 props: {
-                    observation,
+                    interventions,
                 },
             }
         }
         
-        export async function deleteObservation (idObservation, router){
-            const response = await fetch(`http://localhost:3000/observation/${idObservation}`,{
+        export async function deleteInterventions (id){
+            const response = await fetch(`http://localhost:3000/api/v1/interventions/${id}`,{
             method: 'DELETE',
             cors: 'no-cors',
             cache: 'no-cache',
@@ -106,5 +109,6 @@ function Observation  ({observation}) {
             redirect: 'follow',
             referrerPolicy: 'no-referrer',
         })
-        const data = response.json()
     }
+
+    

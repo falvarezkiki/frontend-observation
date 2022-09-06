@@ -16,6 +16,9 @@ export default function Navbar(){
             <a className='font-black text-lg'>Cases</a>
             </Link>
 
+            <Link href= '/interventions'>
+            <a className='font-black text-lg'>Interventions</a>
+            </Link>
             <style jsx>
                 {`
                 nav {

@@ -3,21 +3,28 @@ import Layout from "../../components/layout"
 import Title from "../../components/title"
 import Head from 'next/head';
 
-export default function observation1({observation}){
+
+export default function interventions({interventions}){
     const router = useRouter();
     
     return(
         <Layout>
             <Head>
-            <title>Observacion {observation.id}</title>
+            <title>Interventions</title>
             </Head>
-            <Title>Observation Details</Title>
+            <Title>Interventions Details</Title>
             <div  className='card'>
-                    <h3> Observacion</h3>
+                    <h3> Interventions</h3>
 
-                    <p>ID: {observation.id}</p>
+                    <p>ID: {interventions._id}</p>
                     
-                    <p>Nombre: {observation.name}</p>
+                    <p>Name: {interventions.name}</p>
+
+                    <p>Description: {interventions.description}</p>
+
+                    <p>ID ID Client: {interventions.idClient}</p>
+
+                    
             </div>
             <style jsx>
                 {`
@@ -49,16 +56,23 @@ export default function observation1({observation}){
                 }
                 `}
             </style>
+            
+
+            
+
+            
+
+
         </Layout>
     )
 }
 
 export async function getStaticPaths() {
-    const res = await fetch('http://localhost:3000/observation');
-    const observations = await res.json();
-    const paths = observations.map(observation => {
+    const res = await fetch('http://localhost:3000/api/v1/interventions');
+    const interventions = await res.json();
+    const paths = interventions.map(interventions => {
     return {
-        params: { id: `${observation.id}` }
+        params: { id: `${interventions._id}` }
     }
     });
     
@@ -69,11 +83,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const res = await fetch(`http://localhost:3000/observation/${params.id}`);
-    const observation = await res.json();
+    const res = await fetch(`http://localhost:3000/api/v1/interventions/${params.id}`);
+    const interventions = await res.json();
     return {
         props: {
-            observation
+            interventions
         }
     }
 }
